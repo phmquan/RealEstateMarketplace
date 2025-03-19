@@ -1,95 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from "react-native";
-import { GoogleSignin, GoogleSigninButton } from "@react-native-google-signin/google-signin";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
 
-GoogleSignin.configure({
-  webClientId: "782671983095-bdr70g1c0gh2ce5chuelf1cpttke0m4r.apps.googleusercontent.com", // Thay bằng Web Client ID của bạn
-});
-
-const LoginScreen = () => {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    Alert.alert("Thông báo", `Số điện thoại: ${phone}\nMật khẩu: ${password}`);
-  };
-
-  const signInWithGoogle = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      Alert.alert("Đăng nhập thành công", `Chào ${userInfo.user.name}`);
-    } catch (error) {
-      console.error(error);
-      Alert.alert("Lỗi", "Không thể đăng nhập bằng Google");
-    }
-  };
+export default function AuthScreen() {
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Shop</Text>
-      <Text style={styles.label}>Số điện thoại</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType="phone-pad"
-        value={phone}
-        onChangeText={setPhone}
-        placeholder="Nhập số điện thoại"
-      />
-      <Text style={styles.label}>Mật khẩu</Text>
-      <TextInput
-        style={styles.input}
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Nhập mật khẩu"
-      />
-      <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
+      <Text style={styles.title}>{isLogin ? "Đăng nhập" : "Đăng ký tài khoản"}</Text>
+      {!isLogin && <TextInput placeholder="Họ và tên" style={styles.input} />}
+      <TextInput placeholder="Số điện thoại" style={styles.input} />
+      <TextInput placeholder="Mật khẩu" style={styles.input} secureTextEntry />
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>{isLogin ? "ĐĂNG NHẬP" : "ĐĂNG KÝ"}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.loginText}>ĐĂNG NHẬP</Text>
+      <GoogleSigninButton style={styles.googleButton} />
+      <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
+        <Text style={styles.switchText}>{isLogin ? "Đăng ký tài khoản mới" : "Đăng nhập ngay"}</Text>
       </TouchableOpacity>
-      <Text style={styles.orText}>Hoặc đăng nhập bằng</Text>
-      <GoogleSigninButton style={styles.googleButton} onPress={signInWithGoogle} />
-      <Text style={styles.registerText}>
-        Chưa có tài khoản? <Text style={styles.registerLink}>Đăng ký tài khoản mới</Text>
-      </Text>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#fff",
-    padding: 20,
-  },
-  title: { fontSize: 32, fontWeight: "bold", color: "#FFA500", marginBottom: 20 },
-  label: { alignSelf: "flex-start", fontSize: 16, marginBottom: 5 },
-  input: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 15,
-  },
-  forgotPassword: { color: "blue", marginBottom: 20 },
-  loginButton: {
-    backgroundColor: "#FFA500",
-    padding: 15,
-    width: "100%",
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  loginText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
-  orText: { marginVertical: 15, fontSize: 16 },
-  googleButton: { width: 192, height: 48 },
-  registerText: { marginTop: 20, fontSize: 16 },
-  registerLink: { color: "blue", fontWeight: "bold" },
+  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  input: { width: "100%", height: 50, borderWidth: 1, borderColor: "gray", borderRadius: 5, marginBottom: 10, paddingHorizontal: 10 },
+  button: { width: "100%", height: 50, backgroundColor: "orange", justifyContent: "center", alignItems: "center", borderRadius: 5 },
+  buttonText: { color: "white", fontWeight: "bold" },
+  googleButton: { width: 192, height: 48, marginTop: 10 },
+  switchText: { marginTop: 15, color: "blue" },
 });
-
-export default LoginScreen;
