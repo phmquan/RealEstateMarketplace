@@ -1,66 +1,39 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { GoogleSignin, GoogleSigninButton } from "@react-native-google-signin/google-signin";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
 
-GoogleSignin.configure({
-  webClientId: "782671983095-bdr70g1c0gh2ce5chuelf1cpttke0m4r.apps.googleusercontent.com",
-});
-
-const LoginScreen = ({ navigation }) => {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleGoogleSignIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      console.log("User Info:", userInfo);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+export default function AuthScreen() {
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Shop</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Nhập số điện thoại"
-        value={phone}
-        onChangeText={setPhone}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Nhập mật khẩu"
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Quên mật khẩu?</Text>
-      </TouchableOpacity>
+      <Text style={styles.title}>{isLogin ? "Đăng nhập" : "Đăng ký tài khoản"}</Text>
+      {!isLogin && <TextInput placeholder="Họ và tên" style={styles.input} />}
+      <TextInput placeholder="Số điện thoại" style={styles.input} />
+      <TextInput placeholder="Mật khẩu" style={styles.input} secureTextEntry />
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>ĐĂNG NHẬP</Text>
+        <Text style={styles.buttonText}>{isLogin ? "ĐĂNG NHẬP" : "ĐĂNG KÝ"}</Text>
       </TouchableOpacity>
-      <Text style={styles.orText}>Hoặc đăng nhập bằng</Text>
-      <GoogleSigninButton onPress={handleGoogleSignIn} />
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text style={styles.registerText}>Chưa có tài khoản? <Text style={styles.registerLink}>Đăng ký tài khoản mới</Text></Text>
+      <GoogleSigninButton style={styles.googleButton} />
+      <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
+        <Text style={styles.switchText}>{isLogin ? "Đăng ký tài khoản mới" : "Đăng nhập ngay"}</Text>
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: "center", justifyContent: "center" },
-  title: { fontSize: 24, fontWeight: "bold", color: "orange", marginBottom: 20 },
-  input: { width: "80%", padding: 10, borderWidth: 1, marginBottom: 10, borderRadius: 5 },
-  forgotPassword: { color: "blue", marginBottom: 20 },
-  button: { backgroundColor: "orange", padding: 10, borderRadius: 5, width: "80%", alignItems: "center" },
+  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  input: { width: "100%", height: 50, borderWidth: 1, borderColor: "gray", borderRadius: 5, marginBottom: 10, paddingHorizontal: 10 },
+  button: { width: "100%", height: 50, backgroundColor: "orange", justifyContent: "center", alignItems: "center", borderRadius: 5 },
   buttonText: { color: "white", fontWeight: "bold" },
-  orText: { marginVertical: 10 },
-  registerText: { marginTop: 20 },
-  registerLink: { color: "blue", fontWeight: "bold" },
+  googleButton: { width: 192, height: 48, marginTop: 10 },
+  switchText: { marginTop: 15, color: "blue" },
 });
-
-export default LoginScreen;
