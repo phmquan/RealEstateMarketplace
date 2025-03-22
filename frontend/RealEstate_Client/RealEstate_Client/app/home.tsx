@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TextInput, ScrollView, StyleSheet } from "react-native";
 import Category from "./components/category";
-import Post from "./components/post";
+import PostSmall from "./components/postSmall";
 import SearchBar from "./components/searchBar";
 
 export default function HomeScreen() {
@@ -34,7 +34,7 @@ export default function HomeScreen() {
         {/* ---------------- PostsSection ---------------- */}
         <Text style={styles.sectionTitle}>Bài đăng gần đây</Text>
         {posts.map((post, index) => (
-          <Post
+          <PostSmall
             key={index}
             image={post.image}
             details={post.details}

@@ -8,7 +8,7 @@ type PostProps = {
   location: string;
 };
 
-export default function Post({ image, details, price, location }: PostProps) {
+export default function PostSmall({ image, details, price, location }: PostProps) {
   return (
     <View style={styles.container}>
       <Image source={{ uri: image }} style={styles.image} />

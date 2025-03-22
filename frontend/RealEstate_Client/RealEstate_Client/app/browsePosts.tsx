@@ -1,17 +1,44 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
+import SearchBar from "./components/searchBar";
+import PostMedium from "./components/postMedium";
 
-const BrowsePosts = () => {
+export default function BrowsePosts() {
+  const posts = Array(10).fill({
+    avatar: "https://via.placeholder.com/40",
+    username: "User",
+    time: "2 ngày trước",
+    image: "https://via.placeholder.com/300",
+    details: "Tên bài",
+    price: "100.000.000 VND",
+    location: "Thủ Đức"
+  });
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Browse Posts</Text>
+      {/* Search Bar */}
+      <SearchBar />
+
+      {/* Posts */}
+      <ScrollView contentContainerStyle={styles.postsContainer}>
+        {posts.map((post, index) => (
+          <PostMedium
+            key={index}
+            avatar={post.avatar}
+            username={post.username}
+            time={post.time}
+            image={post.image}
+            details={post.details}
+            price={post.price}
+            location={post.location}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  text: { fontSize: 20, fontWeight: "bold" }
+  container: { flex: 1, backgroundColor: "#fff" },
+  postsContainer: { padding: 15 },
 });
-
-export default BrowsePosts;
