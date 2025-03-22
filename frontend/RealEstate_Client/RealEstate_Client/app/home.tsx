@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TextInput, ScrollView, StyleSheet } from "react-native";
 import Category from "./components/category";
 import Post from "./components/post";
+import SearchBar from "./components/searchBar";
 
 export default function HomeScreen() {
   const categories = Array(5).fill({
@@ -18,9 +19,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       {/* --------------- Search Bar --------------- */}
-      <View style={styles.orangeBar}>
-        <TextInput placeholder="Tìm kiếm..." style={styles.searchBar} />
-      </View>
+      <SearchBar/>
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
         
@@ -49,24 +48,8 @@ export default function HomeScreen() {
 }
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
-  orangeBar: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    backgroundColor: "orange",
-    padding: 15,
-    zIndex: 1, // Ensures the bar stays on top
-  },
-  searchBar: {
-    width: "100%",
-    height: 40,
-    backgroundColor: "#fff",
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    color: "black",
-  },
   contentContainer: {
-    paddingTop: 70, // Leaves space for the orange bar
+    paddingTop: 20, // Leaves space for the orange bar
     paddingHorizontal: 20,
   },
   sectionTitle: { fontSize: 20, fontWeight: "bold", marginTop: 20, marginBottom: 10 },
