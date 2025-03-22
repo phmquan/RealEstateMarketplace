@@ -1,7 +1,7 @@
 import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
-import SearchBar from "./components/searchBar";
-import PostMedium from "./components/postMedium";
+import SearchBar from "../components/searchBar";
+import PostMedium from "../components/postMedium";
 
 export default function BrowsePosts() {
   const posts = Array(10).fill({

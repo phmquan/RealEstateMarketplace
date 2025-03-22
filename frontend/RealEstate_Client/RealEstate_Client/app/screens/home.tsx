@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, TextInput, ScrollView, StyleSheet } from "react-native";
-import Category from "./components/category";
-import PostSmall from "./components/postSmall";
-import SearchBar from "./components/searchBar";
+import Category from "../components/category";
+import PostSmall from "../components/postSmall";
+import SearchBar from "../components/searchBar";
 
 export default function HomeScreen() {
   const categories = Array(5).fill({
