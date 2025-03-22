@@ -19,15 +19,20 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       {/* --------------- Search Bar --------------- */}
-      <SearchBar/>
+      <SearchBar />
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        
         {/* -------------- Categories Section -------------- */}
         <Text style={styles.sectionTitle}>Khám phá danh mục</Text>
         <ScrollView horizontal style={styles.horizontalScroll}>
           {categories.map((category, index) => (
-            <Category key={index} name={category.name} image={category.image} />
+            <View style={styles.category}>
+              <Category
+                key={index}
+                name={category.name}
+                image={category.image}
+              />
+            </View>
           ))}
         </ScrollView>
 
@@ -52,6 +57,12 @@ const styles = StyleSheet.create({
     paddingTop: 20, // Leaves space for the orange bar
     paddingHorizontal: 20,
   },
-  sectionTitle: { fontSize: 20, fontWeight: "bold", marginTop: 20, marginBottom: 10 },
-  horizontalScroll: { marginBottom: 30 },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  horizontalScroll: { marginBottom: 10 },
+  category: { marginBottom: 20 },
 });

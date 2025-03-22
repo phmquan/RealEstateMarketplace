@@ -14,12 +14,17 @@ const Tab = createBottomTabNavigator();
 
 export default function MainContainer() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Trang chủ" component={Home} />
-      <Tab.Screen name="Quản lý tin" component={ManagePosts} />
-      <Tab.Screen name="Đăng tin" component={NewPost} />
-      <Tab.Screen name="Dạo chợ" component={BrowsePosts} />
-      <Tab.Screen name="Tài khoản" component={Account} />
-    </Tab.Navigator>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarLabelStyle: { fontSize: 14 },
+        }}
+      >
+        <Tab.Screen name="Trang chủ" component={Home} />
+        <Tab.Screen name="Quản lý tin" component={ManagePosts} />
+        <Tab.Screen name="Đăng tin" component={NewPost} />
+        <Tab.Screen name="Dạo chợ" component={BrowsePosts} />
+        <Tab.Screen name="Tài khoản" component={Account} />
+      </Tab.Navigator>
   );
 }
