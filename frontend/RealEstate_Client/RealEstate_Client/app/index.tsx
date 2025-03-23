@@ -1,8 +1,8 @@
 import { Text, View } from "react-native";
-import LoginScreen from "./login";
+import MainContainer from "./navigation/mainContainer";
 
 export default function Index() {
   return (
-    <LoginScreen />
+    <MainContainer />
   );
 }
