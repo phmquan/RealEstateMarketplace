@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
+
 
 export default function AuthScreen() {
   const [isLogin, setIsLogin] = useState(true);
@@ -15,12 +15,12 @@ export default function AuthScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>{isLogin ? "Đăng nhập" : "Đăng ký tài khoản"}</Text>
       {!isLogin && <TextInput placeholder="Họ và tên" style={styles.input} />}
-      <TextInput placeholder="Số điện thoại" style={styles.input} />
+      <TextInput placeholder="Email" style={styles.input} />
       <TextInput placeholder="Mật khẩu" style={styles.input} secureTextEntry />
       <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>{isLogin ? "ĐĂNG NHẬP" : "ĐĂNG KÝ"}</Text>
       </TouchableOpacity>
-      <GoogleSigninButton style={styles.googleButton} />
+
       <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
         <Text style={styles.switchText}>{isLogin ? "Đăng ký tài khoản mới" : "Đăng nhập ngay"}</Text>
       </TouchableOpacity>
